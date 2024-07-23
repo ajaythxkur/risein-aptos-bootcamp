@@ -58,6 +58,11 @@ export function Body() {
             }
             const response = await signAndSubmitTransaction(transaction);
             await aptosClient.waitForTransaction({ transactionHash: response.hash });
+            setFormData({
+                title: "",
+                description: "",
+                image: ""
+            });
             getBlogs()
         } catch (error) {
             console.error(error)

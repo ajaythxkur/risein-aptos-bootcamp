@@ -99,8 +99,8 @@ export function SingleBlog({ id }: SingleBlogProps) {
             setTransactionInProgress(false)
         }
     }
-    const donate = async() => {
-        if(!account) return;
+    const donate = async () => {
+        if (!account) return;
         try {
             setTransactionInProgress(true)
             const amountInOcta = Number(amount) * Math.pow(10, 8);
@@ -116,7 +116,7 @@ export function SingleBlog({ id }: SingleBlogProps) {
             setAmount("")
             toast.success(`Successfully donated ${amount} Aptos`)
         } catch (error) {
-            console.error(error) 
+            console.error(error)
         } finally {
             setTransactionInProgress(false)
         }
@@ -135,26 +135,27 @@ export function SingleBlog({ id }: SingleBlogProps) {
                 <div className="row">
                     <div className="col-md-6">
                         <Image className="mb-3" alt={blog.title} src={blog.image} height={500} width={500} />
-
                     </div>
                     <div className="col-md-6">
                         <p>{blog.description}</p>
+                        <hr />
+                        <div className="text-white">
+                            Enjoyed reading?? Give {shortenDescription(blog.author)} a like!!! &nbsp;
+                            {connected && account &&
+                                blog.likes.includes(account.address)
+                                ?
+                                <Image alt="like-dislike" src={"/liked.svg"} width={24} height={24} className="cursor-pointer" onClick={onUnlike} />
+                                :
+                                <Image alt="like-dislike" src={"/not-liked.svg"} width={24} height={24} className="cursor-pointer" onClick={onLike} />
+                            }
+                            <form className="d-flex gap-2">
+                                <input type="text" name="amount" placeholder="Aptos amount" className="p-2" value={amount} onChange={(e) => setAmount(e.target.value)} />
+                                <button type="button" className="btn btn-success" onClick={donate} disabled={transactionInProgress || !connected}>Donate Aptos</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div className="text-white">
-                    Enjoyed reading?? Give {shortenDescription(blog.author)} a like!!! &nbsp;
-                    {connected && account &&
-                        blog.likes.includes(account.address)
-                        ?
-                        <Image alt="like-dislike" src={"/liked.svg"} width={24} height={24} className="cursor-pointer" onClick={onUnlike} />
-                        :
-                        <Image alt="like-dislike" src={"/not-liked.svg"} width={24} height={24} className="cursor-pointer" onClick={onLike} />
-                    }
-                    <form className="d-flex gap-2">
-                        <input type="text" name="amount" placeholder="Aptos amount" className="p-2" value={amount} onChange={(e)=>setAmount(e.target.value)}/>
-                        <button type="button" className="btn btn-success" onClick={donate} disabled={transactionInProgress || !connected}>Donate Aptos</button>
-                    </form>
-                </div>
+
             </div>
         </section>
     )
