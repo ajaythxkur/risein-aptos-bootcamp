@@ -26,6 +26,7 @@ export default function RootLayout({
           <Header />
           <hr />
           {children}
+          <Footer />
         </WalletProvider>
         <Bootstrap />
         <Toaster 
@@ -64,3 +65,11 @@ const WalletConnectButton = dynamic(
     ssr: false,
   }
 );
+
+function Footer(){
+  return(
+    <footer className="py-3 d-flex justify-content-center">
+      <Link href={"https://github.com/ajaythxkur/risein-aptos-bootcamp"} target="_blank" className="text-center">Github</Link>
+    </footer>
+  )
+}
