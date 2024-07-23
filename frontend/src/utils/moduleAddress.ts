@@ -1,0 +1,1 @@
+export const moduleAddress = "0x85a20c0f2f67f8feff4368cc4c7217bf2b8984fedc90fd7a176af200d6855ff5";
